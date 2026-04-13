@@ -1,0 +1,1111 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>YouAreGABIA — Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Sans+KR:wght@300;400;500;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f0f6ff;
+    --surface: #ffffff;
+    --card: #e8f2ff;
+    --border: rgba(99,155,230,0.18);
+    --accent: #2563eb;
+    --accent2: #3b9eff;
+    --accent3: #06b6d4;
+    --text: #1e3a5f;
+    --muted: #4a6fa5;
+    --white: #ffffff;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Noto Sans KR', sans-serif;
+    overflow-x: hidden;
+    line-height: 1.7;
+  }
+
+  /* ── NOISE OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.015'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px 60px;
+    overflow: hidden;
+  }
+
+  .hero-glow {
+    position: absolute;
+    width: 700px; height: 700px;
+    border-radius: 50%;
+    filter: blur(120px);
+    pointer-events: none;
+    opacity: 0.45;
+  }
+  .glow-purple { background: #93c5fd; top: -200px; left: -200px; }
+  .glow-pink   { background: #bfdbfe; bottom: -200px; right: -100px; }
+
+  .hero-badge {
+    display: inline-block;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    color: var(--accent);
+    border: 1px solid var(--accent);
+    padding: 6px 16px;
+    border-radius: 2px;
+    margin-bottom: 28px;
+    animation: fadeUp 0.8s ease both;
+  }
+
+  .hero h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(5rem, 13vw, 11rem);
+    line-height: 0.92;
+    letter-spacing: -0.01em;
+    animation: fadeUp 0.9s 0.1s ease both;
+    position: relative;
+    z-index: 1;
+    color: var(--text);
+  }
+
+  .hero h1 span {
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-sub {
+    font-size: 1.1rem;
+    color: #2d4a6e;
+    margin-top: 24px;
+    max-width: 520px;
+    animation: fadeUp 1s 0.2s ease both;
+  }
+
+  .hero-meta {
+    display: flex;
+    gap: 40px;
+    margin-top: 40px;
+    animation: fadeUp 1s 0.3s ease both;
+    flex-wrap: wrap;
+  }
+
+  .hero-meta-item label {
+    display: block;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    color: var(--muted);
+    margin-bottom: 4px;
+  }
+
+  .hero-meta-item span {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--text);
+  }
+
+  .hero-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 48px;
+    padding: 14px 32px;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    color: #fff;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-decoration: none;
+    border-radius: 3px;
+    transition: transform 0.2s, box-shadow 0.2s;
+    animation: fadeUp 1s 0.4s ease both;
+  }
+
+  .hero-cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px rgba(37,99,235,0.3);
+  }
+
+  .hero-cta svg { width: 16px; height: 16px; }
+
+  .scroll-indicator {
+    position: absolute;
+    bottom: 40px;
+    left: 60px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--muted);
+    letter-spacing: 0.15em;
+    animation: fadeUp 1.2s 0.6s ease both;
+  }
+
+  .scroll-line {
+    width: 40px;
+    height: 1px;
+    background: var(--muted);
+    animation: extend 2s 1s ease infinite alternate;
+  }
+
+  /* ── SECTION BASE ── */
+  section {
+    position: relative;
+    padding: 100px 60px;
+    z-index: 1;
+  }
+
+  .section-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.25em;
+    color: var(--accent);
+    margin-bottom: 16px;
+  }
+
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    line-height: 1;
+    letter-spacing: 0.02em;
+    margin-bottom: 48px;
+    color: var(--text);
+  }
+
+  /* ── DIVIDER ── */
+  .divider {
+    width: 100%;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* ── OVERVIEW ── */
+  .overview-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    background: var(--border);
+    border: 1px solid var(--border);
+  }
+
+  .overview-cell {
+    background: var(--surface);
+    padding: 36px 40px;
+    transition: background 0.3s;
+  }
+
+  .overview-cell:hover { background: var(--card); }
+
+  .overview-cell label {
+    display: block;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    color: var(--muted);
+    margin-bottom: 10px;
+  }
+
+  .overview-cell p {
+    font-size: 1rem;
+    color: var(--text);
+    font-weight: 500;
+  }
+
+  .highlight-text {
+    color: var(--accent);
+  }
+
+  /* ── LIVE DEMO BANNER ── */
+  .demo-banner {
+    background: linear-gradient(135deg, rgba(37,99,235,0.07), rgba(59,158,255,0.07));
+    border: 1px solid rgba(37,99,235,0.2);
+    border-radius: 4px;
+    padding: 28px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 60px 0 0;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  .demo-banner-text {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .demo-dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: #00e676;
+    box-shadow: 0 0 10px #00e676;
+    animation: pulse 2s infinite;
+  }
+
+  .demo-banner a {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.85rem;
+    color: var(--accent);
+    text-decoration: none;
+    letter-spacing: 0.05em;
+    border: 1px solid var(--accent);
+    padding: 10px 24px;
+    border-radius: 3px;
+    transition: background 0.2s, color 0.2s;
+    white-space: nowrap;
+  }
+
+  .demo-banner a:hover {
+    background: var(--accent);
+    color: #000;
+  }
+
+  /* ── TECH STACK ── */
+  .tech-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  .tech-category {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 28px 32px;
+    transition: border-color 0.3s, transform 0.3s;
+  }
+
+  .tech-category:hover {
+    border-color: rgba(37,99,235,0.35);
+    transform: translateY(-4px);
+  }
+
+  .tech-category-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    color: var(--accent);
+    margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .tech-category-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .tech-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .tech-tag {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--text);
+    background: rgba(255,255,255,0.05);
+    border: 1px solid var(--border);
+    padding: 5px 12px;
+    border-radius: 2px;
+    transition: border-color 0.2s, color 0.2s;
+  }
+
+  .tech-tag:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  /* ── FEATURES ── */
+  .features-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    background: var(--border);
+  }
+
+  .feature-item {
+    background: var(--surface);
+    padding: 36px 40px;
+    transition: background 0.3s;
+    cursor: default;
+  }
+
+  .feature-item:hover { background: var(--card); }
+
+  .feature-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.5rem;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 12px;
+    line-height: 1;
+  }
+
+  .feature-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 10px;
+  }
+
+  .feature-desc {
+    font-size: 0.88rem;
+    color: #2d4a6e;
+    line-height: 1.7;
+  }
+
+  /* ── ARCHITECTURE ── */
+  .arch-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 40px;
+  }
+
+  .arch-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+
+  .arch-block {
+    border-radius: 4px;
+    padding: 20px;
+    text-align: center;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.72rem;
+    line-height: 1.5;
+  }
+
+  .arch-client   { background: rgba(37,99,235,0.08); border: 1px solid rgba(37,99,235,0.2); }
+  .arch-backend  { background: rgba(59,158,255,0.08); border: 1px solid rgba(59,158,255,0.2); }
+  .arch-ai       { background: rgba(6,182,212,0.08); border: 1px solid rgba(6,182,212,0.2); }
+  .arch-data     { background: rgba(16,185,129,0.06); border: 1px solid rgba(16,185,129,0.18); }
+  .arch-ext      { background: rgba(99,155,230,0.05); border: 1px solid var(--border); }
+
+  .arch-block strong {
+    display: block;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    margin-bottom: 8px;
+  }
+
+  .arch-client strong { color: var(--accent); }
+  .arch-backend strong { color: var(--accent2); }
+  .arch-ai strong { color: var(--accent3); }
+  .arch-data strong { color: #059669; }
+  .arch-ext strong { color: var(--muted); }
+
+  .arch-arrow {
+    text-align: center;
+    color: var(--muted);
+    font-size: 1.2rem;
+    margin: 4px 0;
+  }
+
+  /* ── TEAM ── */
+  .team-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+
+  .team-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 28px 24px;
+    transition: border-color 0.3s, transform 0.3s;
+  }
+
+  .team-card:hover {
+    border-color: rgba(37,99,235,0.4);
+    transform: translateY(-4px);
+  }
+
+  .team-avatar {
+    width: 52px; height: 52px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.4rem;
+    color: #fff;
+    margin-bottom: 16px;
+  }
+
+  .team-role {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    color: var(--accent);
+    margin-bottom: 6px;
+  }
+
+  .team-name {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 12px;
+  }
+
+  .team-work {
+    font-size: 0.82rem;
+    color: #2d4a6e;
+    line-height: 1.6;
+  }
+
+  /* ── TROUBLESHOOT ── */
+  .trouble-list { display: flex; flex-direction: column; gap: 2px; background: var(--border); }
+
+  .trouble-item {
+    background: var(--surface);
+    padding: 32px 40px;
+    display: grid;
+    grid-template-columns: 240px 1fr 1fr;
+    gap: 32px;
+    align-items: start;
+    transition: background 0.2s;
+  }
+
+  .trouble-item:hover { background: var(--card); }
+
+  .trouble-problem {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--accent2);
+  }
+
+  .trouble-cause {
+    font-size: 0.85rem;
+    color: #2d4a6e;
+    line-height: 1.6;
+  }
+
+  .trouble-fix {
+    font-size: 0.85rem;
+    color: #1e3a5f;
+    font-weight: 500;
+    line-height: 1.6;
+  }
+
+  .trouble-header {
+    background: var(--bg);
+    padding: 14px 40px;
+    display: grid;
+    grid-template-columns: 240px 1fr 1fr;
+    gap: 32px;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.2em;
+    color: #4a6fa5;
+  }
+
+  /* ── LESSONS ── */
+  .lessons-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  .lesson-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 32px 36px;
+    transition: border-color 0.3s;
+  }
+
+  .lesson-card:hover { border-color: rgba(37,99,235,0.3); }
+
+  .lesson-name {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    color: var(--accent);
+    margin-bottom: 6px;
+  }
+
+  .lesson-role {
+    font-size: 0.78rem;
+    color: #4a6fa5;
+    margin-bottom: 14px;
+  }
+
+  .lesson-text {
+    font-size: 0.88rem;
+    color: #1e3a5f;
+    line-height: 1.8;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    padding: 60px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  .footer-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.8rem;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .footer-info {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    text-align: right;
+    line-height: 1.8;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50%       { opacity: 0.5; transform: scale(0.8); }
+  }
+
+  .hero-headphone {
+    position: absolute;
+    right: 8%;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0.12;
+    pointer-events: none;
+    animation: floatHP 6s ease-in-out infinite;
+  }
+
+  @keyframes extend {
+    from { width: 30px; } to { width: 60px; }
+  }
+
+  .hero-headphone {
+    position: absolute;
+    right: 8%;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0.13;
+    pointer-events: none;
+    animation: floatHP 6s ease-in-out infinite;
+  }
+
+  @keyframes floatHP {
+    0%, 100% { transform: translateY(-50%) rotate(-8deg); }
+    50%       { transform: translateY(calc(-50% - 18px)) rotate(4deg); }
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    section, .hero { padding: 60px 24px; }
+    .tech-grid, .features-list, .arch-row, .team-grid, .lessons-grid { grid-template-columns: 1fr; }
+    .overview-grid { grid-template-columns: 1fr; }
+    .trouble-item, .trouble-header { grid-template-columns: 1fr; gap: 10px; }
+    footer { padding: 40px 24px; }
+    .demo-banner { flex-direction: column; }
+  }
+
+  @media (max-width: 600px) {
+    .hero h1 { font-size: 4rem; }
+    .features-list { grid-template-columns: 1fr; }
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    padding: 20px 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+    backdrop-filter: blur(20px);
+    background: rgba(240,246,255,0.85);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.4rem;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .nav-logo svg {
+    width: 22px;
+    height: 22px;
+    flex-shrink: 0;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    color: #1e3a5f;
+    text-decoration: none;
+    transition: color 0.2s;
+    font-weight: 600;
+  }
+
+  .nav-links a:hover { color: var(--accent); }
+
+  @media (max-width: 700px) {
+    nav { padding: 16px 24px; }
+    .nav-links { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M3 18v-6a9 9 0 0 1 18 0v6" stroke="url(#hg1)" stroke-width="2" stroke-linecap="round"/>
+      <path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3v5z" fill="url(#hg2)"/>
+      <path d="M3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3v5z" fill="url(#hg2)"/>
+      <defs>
+        <linearGradient id="hg1" x1="3" y1="12" x2="21" y2="12" gradientUnits="userSpaceOnUse">
+          <stop stop-color="#2563eb"/><stop offset="1" stop-color="#3b9eff"/>
+        </linearGradient>
+        <linearGradient id="hg2" x1="3" y1="17" x2="21" y2="17" gradientUnits="userSpaceOnUse">
+          <stop stop-color="#2563eb"/><stop offset="1" stop-color="#3b9eff"/>
+        </linearGradient>
+      </defs>
+    </svg>
+    YouAreGABIA
+  </div>
+  <ul class="nav-links">
+    <li><a href="#overview">개요</a></li>
+    <li><a href="#tech">기술</a></li>
+    <li><a href="#features">기능</a></li>
+    <li><a href="#team">팀</a></li>
+    <li><a href="#lessons">배운 점</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-glow glow-purple"></div>
+  <div class="hero-glow glow-pink"></div>
+
+  <!-- 대형 헤드폰 장식 -->
+  <div class="hero-headphone">
+    <svg width="420" height="420" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M3 18v-6a9 9 0 0 1 18 0v6" stroke="#2563eb" stroke-width="1.2" stroke-linecap="round"/>
+      <path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3v5z" fill="#2563eb"/>
+      <path d="M3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3v5z" fill="#2563eb"/>
+    </svg>
+  </div>
+  <div class="hero-badge">FULLSTACK PROJECT · 2026</div>
+  <h1>You<br>Are<span>GABIA</span></h1>
+  <p class="hero-sub">K-POP 팬을 위한 음악 스트리밍 · 커뮤니티 통합 플랫폼<br>프론트엔드부터 AI 서비스, 배포까지 아우르는 풀스택 개발 프로젝트</p>
+  <div class="hero-meta">
+    <div class="hero-meta-item">
+      <label>PERIOD</label>
+      <span>2026.01 – 2026.04</span>
+    </div>
+    <div class="hero-meta-item">
+      <label>TYPE</label>
+      <span>풀스택 팀 프로젝트</span>
+    </div>
+    <div class="hero-meta-item">
+      <label>TEAM</label>
+      <span>4명</span>
+    </div>
+    <div class="hero-meta-item">
+      <label>ROLE</label>
+      <span>음악 추천 / AI 챗봇 / 공동 플레이리스트</span>
+    </div>
+  </div>
+  <a href="http://gapmusic.duckdns.org" target="_blank" class="hero-cta">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8" fill="currentColor" stroke="none"/></svg>
+    라이브 데모 보기
+  </a>
+  <div class="scroll-indicator">
+    <div class="scroll-line"></div>
+    SCROLL
+  </div>
+</section>
+
+<!-- OVERVIEW -->
+<section id="overview">
+  <div class="section-label">01 — PROJECT OVERVIEW</div>
+  <div class="section-title">프로젝트 개요</div>
+  <div class="overview-grid">
+    <div class="overview-cell">
+      <label>PROJECT NAME</label>
+      <p>YouAreGABIA Music Platform</p>
+    </div>
+    <div class="overview-cell">
+      <label>TYPE</label>
+      <p>음악 스트리밍 + 팬 커뮤니티 원클릭 통합 플랫폼</p>
+    </div>
+    <div class="overview-cell">
+      <label>PERIOD</label>
+      <p>2026.01 ~ 2026.04 (약 3개월)</p>
+    </div>
+    <div class="overview-cell">
+      <label>TARGET USERS</label>
+      <p>음악 애호가 · K-POP 팬</p>
+    </div>
+    <div class="overview-cell">
+      <label>USER ROLES</label>
+      <p>USER / CRITIC / ADMIN</p>
+    </div>
+    <div class="overview-cell">
+      <label>CORE VALUE</label>
+      <p>음악 감상 · 리뷰 · 퀴즈 · 굿즈까지 <span class="highlight-text">하나의 플랫폼</span>에서</p>
+    </div>
+  </div>
+
+  <div class="demo-banner">
+    <div class="demo-banner-text">
+      <div class="demo-dot"></div>
+      <div>
+        <div style="font-weight:700; color: var(--text); margin-bottom:4px;">서비스 운영 중</div>
+        <div style="font-family: 'Space Mono', monospace; font-size: 0.75rem; color: var(--muted);">http://gapmusic.duckdns.org</div>
+      </div>
+    </div>
+    <a href="http://gapmusic.duckdns.org" target="_blank">→ 사이트 방문</a>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- TECH STACK -->
+<section id="tech">
+  <div class="section-label">02 — TECH STACK</div>
+  <div class="section-title">기술 스택</div>
+  <div class="tech-grid">
+    <div class="tech-category">
+      <div class="tech-category-label">FRONTEND</div>
+      <div class="tech-tags">
+        <span class="tech-tag">React 18</span>
+        <span class="tech-tag">TypeScript</span>
+        <span class="tech-tag">Vite 7</span>
+        <span class="tech-tag">Redux Toolkit</span>
+        <span class="tech-tag">Axios</span>
+        <span class="tech-tag">CSS Modules</span>
+        <span class="tech-tag">Glassmorphism</span>
+      </div>
+    </div>
+    <div class="tech-category">
+      <div class="tech-category-label">BACKEND</div>
+      <div class="tech-tags">
+        <span class="tech-tag">Spring Boot 3.x</span>
+        <span class="tech-tag">Java 17</span>
+        <span class="tech-tag">Spring Security</span>
+        <span class="tech-tag">JWT</span>
+        <span class="tech-tag">OAuth2</span>
+        <span class="tech-tag">Spring Data JPA</span>
+        <span class="tech-tag">MySQL 8.0</span>
+        <span class="tech-tag">Caffeine Cache</span>
+        <span class="tech-tag">AES-256</span>
+      </div>
+    </div>
+    <div class="tech-category">
+      <div class="tech-category-label">AI / PYTHON</div>
+      <div class="tech-tags">
+        <span class="tech-tag">FastAPI</span>
+        <span class="tech-tag">FAISS</span>
+        <span class="tech-tag">SentenceTransformers</span>
+        <span class="tech-tag">librosa</span>
+        <span class="tech-tag">OpenAI GPT-4o-mini</span>
+        <span class="tech-tag">Spring AI</span>
+      </div>
+    </div>
+    <div class="tech-category">
+      <div class="tech-category-label">EXTERNAL APIs</div>
+      <div class="tech-tags">
+        <span class="tech-tag">iTunes API</span>
+        <span class="tech-tag">Last.fm API</span>
+        <span class="tech-tag">Toss Payments</span>
+        <span class="tech-tag">CoolSMS</span>
+        <span class="tech-tag">Gmail SMTP</span>
+        <span class="tech-tag">Sweettracker</span>
+        <span class="tech-tag">Daum Postcode</span>
+      </div>
+    </div>
+    <div class="tech-category">
+      <div class="tech-category-label">INFRA / DEVOPS</div>
+      <div class="tech-tags">
+        <span class="tech-tag">Docker Compose</span>
+        <span class="tech-tag">DuckDNS</span>
+        <span class="tech-tag">Git / GitHub</span>
+        <span class="tech-tag">Figma</span>
+        <span class="tech-tag">Notion</span>
+        <span class="tech-tag">Postman</span>
+      </div>
+    </div>
+    <div class="tech-category">
+      <div class="tech-category-label">AUTH & SECURITY</div>
+      <div class="tech-tags">
+        <span class="tech-tag">Google OAuth2</span>
+        <span class="tech-tag">Kakao OAuth2</span>
+        <span class="tech-tag">Naver OAuth2</span>
+        <span class="tech-tag">AES-256-ECB</span>
+        <span class="tech-tag">Bearer Token</span>
+        <span class="tech-tag">Redux-Persist</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ARCHITECTURE -->
+<section>
+  <div class="section-label">03 — ARCHITECTURE</div>
+  <div class="section-title">시스템 아키텍처</div>
+  <div class="arch-box">
+    <div class="arch-row" style="grid-template-columns: 1fr;">
+      <div class="arch-block arch-client">
+        <strong>CLIENT LAYER</strong>
+        React 18 + TypeScript · Redux Toolkit · Vite · Axios
+      </div>
+    </div>
+    <div class="arch-arrow">↓ REST API (JWT)</div>
+    <div class="arch-row" style="grid-template-columns: 1fr;">
+      <div class="arch-block arch-backend">
+        <strong>API / BACKEND LAYER</strong>
+        Spring Boot 3.x · Spring Security + JWT · OAuth2 · JPA / Hibernate · Caffeine Cache
+      </div>
+    </div>
+    <div class="arch-arrow">↓</div>
+    <div class="arch-row" style="grid-template-columns: 1fr 1fr;">
+      <div class="arch-block arch-data">
+        <strong>DATA LAYER</strong>
+        MySQL 8.0 · 파일 업로드 (/uploads)
+      </div>
+      <div class="arch-block arch-ai">
+        <strong>AI SERVICE LAYER</strong>
+        FastAPI · FAISS · librosa · SentenceTransformers · OpenAI
+      </div>
+    </div>
+    <div class="arch-arrow">↔ External APIs</div>
+    <div class="arch-row" style="grid-template-columns: repeat(5, 1fr);">
+      <div class="arch-block arch-ext"><strong>iTunes</strong></div>
+      <div class="arch-block arch-ext"><strong>Last.fm</strong></div>
+      <div class="arch-block arch-ext"><strong>Toss</strong></div>
+      <div class="arch-block arch-ext"><strong>CoolSMS</strong></div>
+      <div class="arch-block arch-ext"><strong>Docker</strong></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- FEATURES -->
+<section id="features">
+  <div class="section-label">04 — FEATURES</div>
+  <div class="section-title">주요 기능</div>
+  <div class="features-list">
+    <div class="feature-item">
+      <div class="feature-num">01</div>
+      <div class="feature-title">회원 / 인증 시스템</div>
+      <div class="feature-desc">이메일 회원가입, SMS 본인인증(CoolSMS), Google·Kakao·Naver OAuth2 소셜 로그인, JWT 24시간 발급, AES-256 개인정보 암호화</div>
+    </div>
+    <div class="feature-item">
+      <div class="feature-num">02</div>
+      <div class="feature-title">메인 홈페이지 & 개인 플레이리스트</div>
+      <div class="feature-desc">실시간 통합 검색, 오늘의 추천음악, 30초 미리듣기, iTunes API 기반 곡 검색·추가, 플레이리스트 CRUD 및 공유</div>
+    </div>
+    <div class="feature-item">
+      <div class="feature-num">03</div>
+      <div class="feature-title">AI 음악 추천 & 유사곡 탐색</div>
+      <div class="feature-desc">FAISS 벡터 유사도(텍스트:오디오 = 3:7) + Last.fm API 하이브리드 추천, Min-Max 정규화, 유사도 60% 미만 필터링, 10분 캐싱</div>
+    </div>
+    <div class="feature-item">
+      <div class="feature-num">04</div>
+      <div class="feature-title">AI 챗봇</div>
+      <div class="feature-desc">Rule-based 기능 안내 + GPT-4o-mini 음악 추천, iTunes API hallucination 검증(실존 40% 미만 재호출), FAQ·문의 연동</div>
+    </div>
+    <div class="feature-item">
+      <div class="feature-num">05</div>
+      <div class="feature-title">공동 플레이리스트</div>
+      <div class="feature-desc">곡 제안(1인 최대 5곡) + 투표(최대 3곡), 마감 시 상위 10곡 선정, 3곡 미만 자동 삭제, 내 플레이리스트 저장</div>
+    </div>
+    <div class="feature-item">
+      <div class="feature-num">06</div>
+      <div class="feature-title">커뮤니티 게시판</div>
+      <div class="feature-desc">플레이리스트 공유·자유·평론가 게시판, 대댓글, 좋아요, Rate Limiting(게시글 10분 3회), 블라인드 곡 추천, 장르 필터</div>
+    </div>
+    <div class="feature-item">
+      <div class="feature-num">07</div>
+      <div class="feature-title">게임 / 랭킹 / 포인트</div>
+      <div class="feature-desc">음악 퀴즈, 앨범 커버 퀴즈, 카드 게임, 이상형 월드컵(8~64강), 주간 인기곡·가수 랭킹, 5단계 등급 시스템</div>
+    </div>
+    <div class="feature-item">
+      <div class="feature-num">08</div>
+      <div class="feature-title">굿즈샵 & 관리자</div>
+      <div class="feature-desc">카테고리별 굿즈 목록, Toss Payments 결제, Sweettracker 배송 추적, 관리자 회원·주문·포인트·문의 일괄 관리</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- TEAM -->
+<section id="team">
+  <div class="section-label">05 — TEAM</div>
+  <div class="section-title">팀 소개</div>
+  <div class="team-grid">
+    <div class="team-card">
+      <div class="team-avatar">이</div>
+      <div class="team-role">TEAM LEADER</div>
+      <div class="team-name">이주용</div>
+      <div class="team-work">음악 검색 기반 추천, 추천 플레이리스트 리뷰, 공동 플레이리스트, AI 챗봇</div>
+    </div>
+    <div class="team-card">
+      <div class="team-avatar" style="background: linear-gradient(135deg, #3b9eff, #60c8ff)">김</div>
+      <div class="team-role">MEMBER</div>
+      <div class="team-name">김형준</div>
+      <div class="team-work">로그인/회원가입, 마이페이지, 굿즈샵, 관리자</div>
+    </div>
+    <div class="team-card">
+      <div class="team-avatar" style="background: linear-gradient(135deg, #06b6d4, #38bdf8)">윤</div>
+      <div class="team-role">MEMBER</div>
+      <div class="team-name">윤기선</div>
+      <div class="team-work">게시판, 랭킹, 미니게임, 유저 포인트</div>
+    </div>
+    <div class="team-card">
+      <div class="team-avatar" style="background: linear-gradient(135deg, #0ea5e9, #7dd3fc)">김</div>
+      <div class="team-role">MEMBER</div>
+      <div class="team-name">김경민</div>
+      <div class="team-work">메인 홈페이지, 개인 플레이리스트, 이상형 월드컵</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- TROUBLESHOOTING -->
+<section>
+  <div class="section-label">06 — TROUBLESHOOTING</div>
+  <div class="section-title">트러블 슈팅</div>
+  <div class="trouble-list">
+    <div class="trouble-header">
+      <span>문제</span><span>원인</span><span>해결</span>
+    </div>
+    <div class="trouble-item">
+      <div class="trouble-problem">포인트 이중 차감 버그</div>
+      <div class="trouble-cause">DB 저장보다 상태 업데이트가 먼저 실행되어 변경된 값을 기준으로 차감이 한 번 더 발생</div>
+      <div class="trouble-fix">포인트 차감 → PointHistory 저장 → UserPoint 업데이트 순서로 실행 흐름 재정렬</div>
+    </div>
+    <div class="trouble-item">
+      <div class="trouble-problem">유사도 점수 균일 현상</div>
+      <div class="trouble-cause">오디오 특성 벡터 유사도가 모두 75%로 동일하게 출력되어 변별력 없음</div>
+      <div class="trouble-fix">Min-Max 정규화로 오디오 점수를 0.5~1.0 범위로 재분포하여 변별력 확보</div>
+    </div>
+    <div class="trouble-item">
+      <div class="trouble-problem">정렬 변경 시 재생 오류</div>
+      <div class="trouble-cause">정렬 순서 변경 시 PlayerContext 큐가 이전 순서 그대로 남아 다음 곡이 잘못 재생</div>
+      <div class="trouble-fix">onChange 핸들러에서 새 정렬 기준으로 큐를 재계산하고 현재 곡 인덱스를 찾아 play() 재호출</div>
+    </div>
+    <div class="trouble-item">
+      <div class="trouble-problem">새로고침 시 로그인 풀림</div>
+      <div class="trouble-cause">Redux는 메모리 상태라 페이지 새로고침 시 초기값으로 리셋됨</div>
+      <div class="trouble-fix">Redux-Persist 도입으로 localStorage에 인증 상태 영속화하여 새로고침 후에도 로그인 유지</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- LESSONS -->
+<section id="lessons">
+  <div class="section-label">07 — RETROSPECTIVE</div>
+  <div class="section-title">배운 점</div>
+  <div class="lessons-grid">
+    <div class="lesson-card">
+      <div class="lesson-name">이주용</div>
+      <div class="lesson-role">팀장 · AI 추천 / 챗봇</div>
+      <div class="lesson-text">벡터 유사도는 원점수를 그대로 쓰면 안 된다는 것을 깨달았습니다. 코사인 유사도는 특정 범위에 값이 몰릴 수 있어 후처리 없이는 변별력을 얻기 어렵습니다. 프롬프트 엔지니어링으로 hallucination을 줄이고, 외부 API로 사실 검증하는 별도 단계가 필요함을 알게 됐습니다.</div>
+    </div>
+    <div class="lesson-card">
+      <div class="lesson-name">김형준</div>
+      <div class="lesson-role">팀원 · 회원 / 굿즈 / 관리자</div>
+      <div class="lesson-text">인증부터 결제까지 풀스택으로 담당하며 데이터 흐름 전체를 설계하고 책임지는 경험을 했습니다. JWT와 Redux 상태 관리를 연결하는 과정에서 서버와 클라이언트가 독립적으로 동작한다는 점을 체감했고, 양쪽 모두에서 보안을 고려해야 한다는 것을 깨달았습니다.</div>
+    </div>
+    <div class="lesson-card">
+      <div class="lesson-name">윤기선</div>
+      <div class="lesson-role">팀원 · 게시판 / 랭킹 / 게임</div>
+      <div class="lesson-text">시간 관리, 팀 협업, 타인의 코드를 이해하는 것, 쿼리 이해도 등 기본 역량을 익히는 시간이었습니다. 만들어야 할 것과 실질적으로 언제까지 만들 수 있는지를 현실적으로 조율하는 법을 배웠습니다.</div>
+    </div>
+    <div class="lesson-card">
+      <div class="lesson-name">김경민</div>
+      <div class="lesson-role">팀원 · 홈 / 플레이리스트 / 월드컵</div>
+      <div class="lesson-text">프론트엔드부터 백엔드, 외부 API까지 풀스택으로 진행하며 여러 레이어가 맞물리는 구조를 체감했습니다. 코드 한 줄이 팀원의 작업에 영향을 미친다는 책임감이 생겼고, 동작하는 코드를 넘어 구조를 고민하는 습관을 길렀습니다.</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">YouAreGABIA</div>
+  <div class="footer-info">
+    K-POP Fan Music Platform<br>
+    2026.01 – 2026.04 · Team of 4<br>
+    <a href="http://gapmusic.duckdns.org" target="_blank" style="color: var(--accent); text-decoration: none;">gapmusic.duckdns.org ↗</a>
+  </div>
+</footer>
+
+</body>
+</html>
