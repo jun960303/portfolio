@@ -640,19 +640,131 @@
     50%       { transform: translateY(calc(-50% - 18px)) rotate(4deg); }
   }
 
-  /* ── RESPONSIVE ── */
+  /* ── RESPONSIVE: 태블릿 ── */
   @media (max-width: 900px) {
-    section, .hero { padding: 60px 24px; }
-    .tech-grid, .features-list, .arch-row, .team-grid, .lessons-grid { grid-template-columns: 1fr; }
-    .overview-grid { grid-template-columns: 1fr; }
-    .trouble-item, .trouble-header { grid-template-columns: 1fr; gap: 10px; }
-    footer { padding: 40px 24px; }
-    .demo-banner { flex-direction: column; }
+    section, .hero { padding: 60px 28px; }
+    .tech-grid { grid-template-columns: 1fr 1fr; }
+    .features-list { grid-template-columns: 1fr; }
+    .arch-row { grid-template-columns: 1fr 1fr; }
+    .team-grid { grid-template-columns: 1fr 1fr; }
+    .lessons-grid { grid-template-columns: 1fr; }
+    .overview-grid { grid-template-columns: 1fr 1fr; }
+    .trouble-item { grid-template-columns: 1fr; gap: 8px; padding: 24px 28px; }
+    .trouble-header { display: none; }
+    footer { padding: 40px 28px; }
+    .demo-banner { flex-direction: column; align-items: flex-start; }
+    .hero-headphone { opacity: 0.07; right: 2%; }
+    nav { padding: 16px 28px; }
   }
 
+  /* ── RESPONSIVE: 모바일 ── */
   @media (max-width: 600px) {
-    .hero h1 { font-size: 4rem; }
+    nav { padding: 14px 20px; }
+    .nav-logo { font-size: 1.1rem; }
+    .nav-links { display: none; }
+
+    .hero { padding: 100px 20px 60px; min-height: 100svh; }
+    .hero h1 { font-size: clamp(3.2rem, 16vw, 5rem); }
+    .hero-badge { font-size: 0.6rem; padding: 5px 12px; }
+    .hero-sub { font-size: 0.95rem; }
+    .hero-meta { gap: 20px; }
+    .hero-meta-item span { font-size: 0.85rem; }
+    .hero-cta { padding: 12px 24px; font-size: 0.75rem; width: 100%; justify-content: center; }
+    .hero-headphone { display: none; }
+    .scroll-indicator { left: 20px; bottom: 24px; }
+
+    section { padding: 52px 20px; }
+    .section-title { font-size: clamp(2rem, 10vw, 3rem); margin-bottom: 28px; }
+    .section-label { font-size: 0.6rem; }
+
+    .overview-grid { grid-template-columns: 1fr; }
+    .overview-cell { padding: 24px 20px; }
+    .demo-banner { padding: 20px; }
+
+    .tech-grid { grid-template-columns: 1fr; gap: 14px; }
+    .tech-category { padding: 22px 20px; }
+
+    .arch-box { padding: 20px; }
+    .arch-row { grid-template-columns: 1fr !important; gap: 10px; }
+    .arch-block { font-size: 0.68rem; padding: 14px; }
+
     .features-list { grid-template-columns: 1fr; }
+    .feature-item { padding: 24px 20px; }
+    .feature-num { font-size: 2rem; }
+
+    .team-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+    .team-card { padding: 20px 16px; }
+    .team-avatar { width: 42px; height: 42px; font-size: 1.1rem; }
+    .team-name { font-size: 0.95rem; }
+    .team-work { font-size: 0.78rem; }
+
+    .trouble-item { padding: 20px; }
+    .trouble-problem { font-size: 0.88rem; }
+    .trouble-cause, .trouble-fix { font-size: 0.82rem; }
+
+    .lessons-grid { grid-template-columns: 1fr; gap: 14px; }
+    .lesson-card { padding: 24px 20px; }
+
+    footer { padding: 32px 20px; flex-direction: column; align-items: flex-start; gap: 12px; }
+    .footer-info { text-align: left; }
+  }
+
+  @media (max-width: 360px) {
+    .hero h1 { font-size: 3rem; }
+    .team-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ── HAMBURGER ── */
+  .nav-hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    padding: 4px;
+    background: none;
+    border: none;
+  }
+  .nav-hamburger span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: var(--accent);
+    border-radius: 2px;
+    transition: all 0.3s;
+  }
+  .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+  .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  .mobile-menu {
+    display: none;
+    position: fixed;
+    top: 56px; left: 0; right: 0;
+    background: rgba(240,246,255,0.98);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+    padding: 16px 20px 20px;
+    z-index: 99;
+    flex-direction: column;
+    gap: 0;
+  }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    color: #1e3a5f;
+    text-decoration: none;
+    font-weight: 600;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--border);
+    transition: color 0.2s;
+  }
+  .mobile-menu a:last-child { border-bottom: none; }
+  .mobile-menu a:hover { color: var(--accent); }
+
+  @media (max-width: 600px) {
+    .nav-hamburger { display: flex; }
   }
 
   /* ── NAV ── */
@@ -738,7 +850,31 @@
     <li><a href="#team">팀</a></li>
     <li><a href="#lessons">배운 점</a></li>
   </ul>
+  <button class="nav-hamburger" id="hamburger" onclick="toggleMenu()" aria-label="메뉴">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#overview" onclick="closeMenu()">개요</a>
+  <a href="#tech" onclick="closeMenu()">기술</a>
+  <a href="#features" onclick="closeMenu()">기능</a>
+  <a href="#team" onclick="closeMenu()">팀</a>
+  <a href="#lessons" onclick="closeMenu()">배운 점</a>
+</div>
+
+<script>
+  function toggleMenu() {
+    const btn = document.getElementById('hamburger');
+    const menu = document.getElementById('mobileMenu');
+    btn.classList.toggle('open');
+    menu.classList.toggle('open');
+  }
+  function closeMenu() {
+    document.getElementById('hamburger').classList.remove('open');
+    document.getElementById('mobileMenu').classList.remove('open');
+  }
+</script>
 
 <!-- HERO -->
 <section class="hero">
